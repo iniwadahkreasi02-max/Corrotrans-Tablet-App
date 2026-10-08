@@ -110,6 +110,12 @@ const copy = {
   },
 } as const;
 
+type CopyText = { [Key in keyof typeof copy.id]: string };
+
+function paymentStatusText(text: CopyText, status: string): string {
+  return status in text ? text[status as keyof CopyText] : status;
+}
+
 function getStatus(error: unknown) {
   if (!error || typeof error !== 'object') return undefined;
   const candidate = error as { status?: unknown; response?: { status?: unknown } };
@@ -225,7 +231,7 @@ function VehicleDisplay() {
   const [refreshError, setRefreshError] = useState('');
   const [revoked, setRevoked] = useState(false);
   const [syncedAt, setSyncedAt] = useState<Date | null>(null);
-  const t = copy[language];
+  const t: CopyText = copy[language];
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -707,7 +713,7 @@ function VehicleDisplay() {
                         </button>
                       </div>
                     </div>
-                   <div><small>{t.paymentStatus}</small><strong data-testid="text-payment-status">{t[activeTrip.paymentStatus]}</strong></div>
+                   <div><small>{t.paymentStatus}</small><strong data-testid="text-payment-status">{paymentStatusText(t, activeTrip.paymentStatus)}</strong></div>
                  </div>
                  <p className="vd-preview-readonly"><Eye size={15} />{t.readOnly}</p>
                </aside>
@@ -727,14 +733,14 @@ function VehicleDisplay() {
                   </div>
                   <div className="vd-metrics">
                     <div><small>{t.paymentMethod}</small><strong data-testid="text-order-payment">{activeTrip.paymentMethod.toUpperCase()}</strong></div>
-                    <div><small>{t.paymentStatus}</small><strong data-testid="text-payment-status">{t[activeTrip.paymentStatus]}</strong></div>
+                     <div><small>{t.paymentStatus}</small><strong data-testid="text-payment-status">{paymentStatusText(t, activeTrip.paymentStatus)}</strong></div>
                   </div>
                 </article>
               </div>
               <aside className="vd-side-column">
                 <article className="vd-payment-card">
                   <span className="vd-payment-icon"><LockKeyhole size={21} /></span>
-                  <div><small>{t.paymentStatus}</small><h3>{t[activeTrip.paymentStatus]}</h3><p>{activeTrip.paymentMethod.toUpperCase()} · {t.paymentHint}</p></div>
+                   <div><small>{t.paymentStatus}</small><h3>{paymentStatusText(t, activeTrip.paymentStatus)}</h3><p>{activeTrip.paymentMethod.toUpperCase()} · {t.paymentHint}</p></div>
                 </article>
                 <div className="vd-readonly-note"><Eye size={18} /><p>{language === 'id' ? 'Layar ini hanya menampilkan informasi kendaraan yang dipasangkan.' : 'This screen only displays information for the paired vehicle.'}</p></div>
               </aside>
