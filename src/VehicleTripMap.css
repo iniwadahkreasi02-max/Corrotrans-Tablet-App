@@ -1,0 +1,339 @@
+.vd-trip-map-panel {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 13px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: var(--paper);
+  box-shadow: 0 9px 24px rgba(24,52,82,.045);
+}
+
+.vd-trip-map-heading {
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.vd-trip-map-heading .vd-overline { color: var(--blue); }
+.vd-map-route-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #70806f;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+.vd-map-route-badge i { width: 6px; height: 6px; border-radius: 50%; background: #65a879; }
+
+.vd-map-visual {
+  width: 100%;
+  min-height: 190px;
+  flex: 1 1 auto;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  background: #e7f0e9;
+  aspect-ratio: 1.85 / 1;
+}
+
+.vd-google-map-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #e7f0e9;
+}
+
+.vd-map-status {
+  position: absolute;
+  left: 9px;
+  bottom: 9px;
+  z-index: 2;
+  max-width: calc(100% - 20px);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 9px;
+  border: 1px solid rgba(24,52,82,.11);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(255,253,247,.94);
+  box-shadow: 0 3px 10px rgba(24,52,82,.12);
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.vd-map-status--loading {
+  top: 50%;
+  bottom: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.vd-map-status--error, .vd-map-status--routeError {
+  top: 9px;
+  right: 9px;
+  bottom: auto;
+  left: 9px;
+  max-width: none;
+  color: #873d2b;
+  background: rgba(255,248,237,.97);
+}
+
+.vd-map-spinner {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  border: 2px solid rgba(7,87,183,.2);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: vd-map-spin .8s linear infinite;
+}
+
+@keyframes vd-map-spin { to { transform: rotate(360deg); } }
+
+.vd-map-stops {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 18px minmax(0,1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.vd-map-stop {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.vd-map-stop > div { min-width: 0; display: grid; gap: 3px; }
+.vd-map-stop small, .vd-preview-order-id small, .vd-preview-booker small, .vd-preview-payment-grid small {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.vd-map-stop strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font: 700 11px/1.25 "Plus Jakarta Sans", sans-serif;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.vd-map-stop-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  margin-top: 2px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+}
+.vd-map-stop--destination .vd-map-stop-dot { border-color: #cf6949; background: #cf6949; }
+.vd-map-stop-connector { height: 1px; background: #d8e0dd; }
+
+.vd-preview-driver-card { margin-bottom: clamp(10px, 2vw, 18px); }
+.vd-serial-group { display: grid; justify-items: start; gap: 4px; }
+.vd-serial-group small { color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: .09em; }
+
+.vd-trip-preview-layout {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0,1.45fr) minmax(260px,.82fr);
+  align-items: stretch;
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.vd-preview-fare-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 13px;
+  padding: clamp(18px, 2.4vw, 28px);
+  border: 1px solid #d8e4e9;
+  border-radius: 17px;
+  color: var(--paper);
+  background: var(--blue);
+  box-shadow: 0 13px 28px rgba(7,87,183,.16);
+}
+
+.vd-preview-fare-heading { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
+.vd-preview-fare-heading .vd-overline { color: rgba(255,253,247,.74); }
+.vd-preview-active { display: inline-flex; align-items: center; gap: 6px; color: #e8f8ed; font-size: 8px; font-weight: 800; letter-spacing: .06em; text-align: right; }
+.vd-preview-active i { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: #8ed2a3; box-shadow: 0 0 0 3px rgba(142,210,163,.16); }
+.vd-preview-fare-amount {
+  color: var(--yellow);
+  font: 800 clamp(36px, 4.8vw, 64px)/1 "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -.06em;
+  overflow-wrap: anywhere;
+}
+.vd-preview-order-id { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,253,247,.2); }
+.vd-preview-order-id small,.vd-preview-booker small,.vd-preview-payment-grid small { color: rgba(255,253,247,.66); }
+.vd-preview-order-id strong { color: var(--paper); font-size: 10px; letter-spacing: .08em; overflow-wrap: anywhere; text-align: right; }
+.vd-preview-booker { display: grid; gap: 4px; }
+.vd-preview-booker strong { color: var(--paper); font: 700 14px/1.2 "Plus Jakarta Sans", sans-serif; overflow-wrap: anywhere; }
+.vd-preview-payment-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; padding-top: 10px; border-top: 1px solid rgba(255,253,247,.2); }
+.vd-preview-payment-grid > div { min-width: 0; display: grid; gap: 5px; }
+.vd-preview-payment-grid strong { color: var(--paper); font-size: 11px; line-height: 1.2; overflow-wrap: anywhere; }
+.vd-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.vd-preview-payment-options { min-width: 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px; }
+.vd-preview-payment-options button {
+  min-width: 0;
+  padding: 6px 7px;
+  border: 1px solid rgba(255,253,247,.38);
+  border-radius: 7px;
+  color: rgba(255,253,247,.86);
+  background: rgba(255,253,247,.08);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.vd-preview-payment-options button:hover { border-color: rgba(255,253,247,.75); background: rgba(255,253,247,.15); }
+.vd-preview-payment-options button.active { border-color: var(--yellow); color: var(--blue); background: var(--yellow); }
+.vd-preview-payment-options button:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+.vd-preview-readonly { display: flex; align-items: center; gap: 7px; margin: 0; color: rgba(255,253,247,.73); font-size: 9px; }
+.vd-preview-readonly svg { flex: 0 0 auto; }
+
+@media (min-width: 600px) and (max-width: 1400px) {
+  .vd-connected.vd-preview-mode .vd-display-shell { gap: 8px; }
+  .vd-connected.vd-preview-mode .vd-preview-banner,
+  .vd-connected.vd-preview-mode .vd-topline,
+  .vd-connected.vd-preview-mode .vd-preview-driver-card { margin-bottom: 0; }
+  .vd-connected.vd-preview-mode .vd-trip-preview-layout {
+    flex: 1 1 0;
+    min-height: 0;
+    grid-template-columns: minmax(0,1.35fr) minmax(220px,.88fr);
+    gap: 11px;
+  }
+  .vd-connected.vd-preview-mode .vd-preview-driver-card { min-height: 0; padding: 8px 12px; gap: 13px; border-radius: 13px; }
+  .vd-connected.vd-preview-mode .vd-photo-frame { width: 68px; height: 68px; border-width: 3px; border-radius: 10px; }
+  .vd-connected.vd-preview-mode .vd-driver-info h2 { margin: 3px 0 5px; font-size: clamp(18px,2.3vw,26px); }
+  .vd-connected.vd-preview-mode .vd-serial { padding: 4px 8px; font-size: 14px; }
+  .vd-connected.vd-preview-mode .vd-serial-group { gap: 2px; }
+  .vd-connected.vd-preview-mode .vd-trip-map-panel { gap: 7px; padding: 10px; border-radius: 14px; }
+  .vd-connected.vd-preview-mode .vd-map-visual { min-height: 0; flex: 1 1 0; aspect-ratio: auto; }
+  .vd-connected.vd-preview-mode .vd-map-stops { gap: 5px; }
+  .vd-connected.vd-preview-mode .vd-map-stop strong { font-size: 10px; -webkit-line-clamp: 2; }
+  .vd-connected.vd-preview-mode .vd-preview-fare-card { gap: 8px; padding: 14px; border-radius: 14px; }
+  .vd-connected.vd-preview-mode .vd-preview-fare-amount { font-size: clamp(38px,5.5vw,66px); }
+}
+
+@media (min-width: 600px) and (max-width: 1400px) and (max-height: 700px) {
+  .vd-connected.vd-preview-mode .vd-preview-driver-card { padding-block: 5px; }
+  .vd-connected.vd-preview-mode .vd-photo-frame { width: 58px; height: 58px; }
+  .vd-connected.vd-preview-mode .vd-driver-info h2 { font-size: clamp(17px,2vw,22px); }
+  .vd-connected.vd-preview-mode .vd-serial { padding: 3px 7px; font-size: 12px; }
+  .vd-connected.vd-preview-mode .vd-trip-map-panel { gap: 5px; padding: 8px; }
+  .vd-connected.vd-preview-mode .vd-trip-map-heading { min-height: 16px; }
+  .vd-connected.vd-preview-mode .vd-map-stops { gap: 4px; }
+  .vd-connected.vd-preview-mode .vd-map-stop strong { font-size: 9px; -webkit-line-clamp: 1; }
+  .vd-connected.vd-preview-mode .vd-preview-fare-card { gap: 6px; padding: 10px; }
+  .vd-connected.vd-preview-mode .vd-preview-fare-amount { font-size: clamp(34px,5vw,52px); }
+  .vd-connected.vd-preview-mode .vd-preview-payment-grid { padding-top: 7px; }
+}
+
+@media (max-width: 800px) {
+  .vd-trip-preview-layout { grid-template-columns: minmax(0,1.2fr) minmax(210px,.9fr); gap: 10px; }
+}
+
+@media (max-width: 560px) {
+  .vd-preview-driver-card { margin-bottom: 12px; }
+  .vd-trip-preview-layout { grid-template-columns: 1fr; }
+  .vd-trip-map-panel { min-height: 340px; }
+  .vd-map-visual { min-height: 210px; flex: 0 0 auto; }
+  .vd-preview-fare-card { gap: 15px; padding: 18px; }
+  .vd-preview-fare-amount { font-size: clamp(42px,12vw,58px); }
+  .vd-map-stops { gap: 5px; }
+  .vd-map-stop strong { font-size: 10px; }
+}
+
+.vehicle-display-minimal .vd-map-route-badge { color: hsl(var(--success)); }
+.vehicle-display-minimal .vd-map-route-badge i { background: hsl(var(--success)); }
+.vehicle-display-minimal .vd-map-visual,
+.vehicle-display-minimal .vd-google-map-iframe { background: hsl(var(--muted)); }
+.vehicle-display-minimal .vd-map-status {
+  border-color: hsl(var(--border) / .7);
+  background: hsl(var(--card) / .94);
+  box-shadow: 0 3px 10px hsl(var(--foreground) / .12);
+}
+.vehicle-display-minimal .vd-map-status--error,
+.vehicle-display-minimal .vd-map-status--routeError {
+  color: hsl(var(--destructive));
+  background: hsl(var(--warning) / .12);
+}
+.vehicle-display-minimal .vd-map-spinner { border-color: hsl(var(--primary) / .2); }
+.vehicle-display-minimal .vd-map-spinner { border-top-color: hsl(var(--primary)); }
+.vehicle-display-minimal .vd-map-stop strong,
+.vehicle-display-minimal .vd-preview-fare-amount,
+.vehicle-display-minimal .vd-preview-booker strong {
+  font-family: var(--app-font-sans) !important;
+}
+.vehicle-display-minimal .vd-map-stop--destination .vd-map-stop-dot {
+  border-color: hsl(var(--destructive));
+  background: hsl(var(--destructive));
+}
+.vehicle-display-minimal .vd-map-stop-connector { background: hsl(var(--border)); }
+.vehicle-display-minimal .vd-preview-fare-card { border-color: var(--line); }
+.vehicle-display-minimal .vd-order-banner,
+.vehicle-display-minimal .vd-standby,
+.vehicle-display-minimal .vd-preview-fare-card { color: var(--on-primary); }
+.vehicle-display-minimal .vd-banner-copy strong,
+.vehicle-display-minimal .vd-standby-copy h2,
+.vehicle-display-minimal .vd-preview-order-id strong,
+.vehicle-display-minimal .vd-preview-booker strong,
+.vehicle-display-minimal .vd-preview-payment-grid strong,
+.vehicle-display-minimal .vd-waiting { color: var(--on-primary); }
+.vehicle-display-minimal .vd-banner-copy span,
+.vehicle-display-minimal .vd-price small,
+.vehicle-display-minimal .vd-standby-copy .vd-overline,
+.vehicle-display-minimal .vd-standby-copy p,
+.vehicle-display-minimal .vd-preview-fare-heading .vd-overline,
+.vehicle-display-minimal .vd-preview-order-id small,
+.vehicle-display-minimal .vd-preview-booker small,
+.vehicle-display-minimal .vd-preview-payment-grid small,
+.vehicle-display-minimal .vd-preview-readonly {
+  color: hsl(var(--primary-foreground) / .72);
+}
+.vehicle-display-minimal .vd-preview-active { color: hsl(var(--primary-foreground) / .85); }
+.vehicle-display-minimal .vd-preview-active i {
+  background: hsl(var(--success));
+  box-shadow: 0 0 0 3px hsl(var(--success) / .18);
+}
+.vehicle-display-minimal .vd-preview-payment-options button {
+  border-color: hsl(var(--primary-foreground) / .38);
+  color: hsl(var(--primary-foreground) / .86);
+  background: hsl(var(--primary-foreground) / .08);
+}
+.vehicle-display-minimal .vd-preview-payment-options button:hover {
+  border-color: hsl(var(--primary-foreground) / .75);
+  background: hsl(var(--primary-foreground) / .15);
+}
+.vehicle-display-minimal .vd-preview-payment-options button.active {
+  border-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  background: hsl(var(--secondary));
+}
+.vehicle-display-minimal .vd-standby::after,
+.vehicle-display-minimal .vd-orbit {
+  border-color: hsl(var(--primary-foreground) / .2);
+}
+.vehicle-display-minimal .vd-standby::after {
+  box-shadow: 0 0 0 28px hsl(var(--primary-foreground) / .05),
+    0 0 0 60px hsl(var(--primary-foreground) / .035);
+}

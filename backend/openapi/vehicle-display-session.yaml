@@ -1,0 +1,21 @@
+openapi: 3.1.0
+components:
+  schemas:
+    VehicleDisplayDriverProfile:
+      type: object
+      required: [name, plate, vehicleModel, photoUrl]
+      properties:
+        name: { type: string }
+        plate: { type: string }
+        vehicleModel: { type: string }
+        photoUrl: { type: [string, "null"] }
+    VehicleDisplaySessionResponse:
+      type: object
+      required: [pairingId, vehicleId, vehicleLabel, pairedAt, driver, activeTrip]
+      properties:
+        pairingId: { type: string, format: uuid }
+        vehicleId: { type: string, format: uuid }
+        vehicleLabel: { type: string }
+        pairedAt: { type: string, format: date-time }
+        driver: { $ref: "#/components/schemas/VehicleDisplayDriverProfile" }
+        activeTrip: { type: [object, "null"] }

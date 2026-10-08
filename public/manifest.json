@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "Corrotrans Vehicle Display",
+  "short_name": "Corrotrans",
+  "description": "Tampilan kendaraan Corrotrans untuk tablet yang dipasangkan dengan akun Driver terverifikasi.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#fff7db",
+  "theme_color": "#fad21e",
+  "icons": [
+    {
+      "src": "./icons/corrotrans-pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/corrotrans-pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
